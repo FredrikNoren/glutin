@@ -1,9 +1,12 @@
 extern crate gl_generator;
 extern crate khronos_api;
+extern crate syntex;
+extern crate serde_codegen;
 
 use std::env;
 use std::fs::File;
 use std::path::PathBuf;
+use std::path::Path;
 
 fn main() {
     let target = env::var("TARGET").unwrap();
@@ -184,4 +187,15 @@ fn main() {
                                     gl_generator::Fallbacks::All,
                                     khronos_api::GL_XML, vec![],
                                     "3.0", "core", &mut file).unwrap();
+
+
+    // Generate de/serialization code for WindowEvents
+    let events_src = Path::new("src/events.in.rs");
+    let events_dst = dest.join("events.rs");
+
+    let mut syntex_registry = syntex::Registry::new();
+
+    serde_codegen::register(&mut syntex_registry);
+    syntex_registry.expand("", &events_src, &events_dst).unwrap();
+    println!("cargo:rerun-if-changed=src/events.in.rs");
 }

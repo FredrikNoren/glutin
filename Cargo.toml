@@ -14,10 +14,14 @@ build = "build.rs"
 lazy_static = "0.1.10"
 libc = "0.2"
 shared_library = "0.1.0"
+serde = "0.6"
+serde_json = "0.6"
 
 [build-dependencies]
 gl_generator = "0.4"
 khronos_api = "1.0"
+serde_codegen = "0.6"
+syntex = "0.26"
 
 [dev-dependencies]
 clock_ticks = "0.1.0"

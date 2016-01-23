@@ -30,6 +30,8 @@ extern crate lazy_static;
 extern crate shared_library;
 
 extern crate libc;
+extern crate serde;
+extern crate serde_json;
 
 #[cfg(target_os = "windows")]
 extern crate winapi;
